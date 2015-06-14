@@ -18,7 +18,7 @@ int main(int argc, const char** argv) {
     {
         FixMsg msg(rawstr);
         //while( msg.getNextItemViewer());
-        while( get<0>(msg.getCachedNextItemViewer()) > 0);
+        while( msg.getCachedNextItemViewer() );
     }
     return 0;
 }

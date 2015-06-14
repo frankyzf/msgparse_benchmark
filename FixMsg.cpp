@@ -46,14 +46,14 @@ void FixMsg::ParsingAll() {
         if(sp > cur) {
             size_t vp = sp;
             while (vp < len && rawMsg[vp++] != valDelim);
-            items.push( make_tuple(atoi(rawMsg.substr(cur, sp-cur).c_str()),
+            items.push( FixItemViewer(atoi(rawMsg.substr(cur, sp-cur).c_str()),
                                 sp+1, vp) );
             cur = vp+1;
         }
     }
 }
 
-tuple<int, int, int> FixMsg::getCachedNextItemViewer() {
+FixItemViewer FixMsg::getCachedNextItemViewer() {
     if(!parsed)
     {
         ParsingAll();
@@ -66,5 +66,5 @@ tuple<int, int, int> FixMsg::getCachedNextItemViewer() {
         return ret;
     }
     else
-        return make_tuple(-1,0,0);
+        return FixItemViewer(-1,0,0);
 }

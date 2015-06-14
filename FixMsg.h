@@ -21,7 +21,7 @@ public:
     }
     FixItem getNextItem();
     FixItemViewer getNextItemViewer();
-    tuple<int, int, int> getCachedNextItemViewer();
+    FixItemViewer getCachedNextItemViewer();
     void ParsingAll();
 protected:
     string rawMsg;
@@ -29,7 +29,7 @@ protected:
     size_t len;
 
     bool parsed;
-    queue<tuple<int, int, int> > items;
+    queue<FixItemViewer> items;
     friend struct FixItem;
 
 };
