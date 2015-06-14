@@ -22,7 +22,7 @@ FixItem FixMsg::getNextItem() {
 }
 
 FixItemViewer FixMsg::getNextItemViewer() {
-        if(cur < len) {
+    if(cur < len) {
         size_t sp = cur;
         while (sp < len && rawMsg[sp++] != tagDelim);
         if(sp > cur) {
@@ -35,4 +35,36 @@ FixItemViewer FixMsg::getNextItemViewer() {
         }
     }
     return FixItemViewer(-1, 0, 0);
+}
+
+
+void FixMsg::ParsingAll() {
+    while(cur < len)
+    {
+        size_t sp = cur;
+        while (sp < len && rawMsg[sp++] != tagDelim);
+        if(sp > cur) {
+            size_t vp = sp;
+            while (vp < len && rawMsg[vp++] != valDelim);
+            items.push( make_tuple(atoi(rawMsg.substr(cur, sp-cur).c_str()),
+                                sp+1, vp) );
+            cur = vp+1;
+        }
+    }
+}
+
+tuple<int, int, int> FixMsg::getCachedNextItemViewer() {
+    if(!parsed)
+    {
+        ParsingAll();
+        parsed = true;
+    }
+
+    if(items.size() > 0) {
+        auto ret = items.front();
+        items.pop();
+        return ret;
+    }
+    else
+        return make_tuple(-1,0,0);
 }
