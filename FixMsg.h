@@ -7,6 +7,7 @@
 
 #include "common.h"
 #include "FixItem.h"
+#include "FixItemViewer.h"
 
 class FixMsg {
 public:
@@ -15,6 +16,7 @@ public:
         return rawMsg;
     }
     FixItem getNextItem();
+    FixItemViewer getNextItemViewer();
 protected:
     string rawMsg;
     size_t cur;

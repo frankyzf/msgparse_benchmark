@@ -13,10 +13,26 @@ FixItem FixMsg::getNextItem() {
             size_t vp = sp;
             while (vp < len && rawMsg[vp++] != valDelim);
             FixItem item {atoi(rawMsg.substr(cur, sp-cur).c_str()),
-                         rawMsg.substr(sp+1, vp-sp-1), true};
+                         rawMsg.substr(sp+1, vp-sp-1) };
             cur = vp;
             return item;
         }
     }
-    return FixItem{};
+    return FixItem(-1, "");
+}
+
+FixItemViewer FixMsg::getNextItemViewer() {
+        if(cur < len) {
+        size_t sp = cur;
+        while (sp < len && rawMsg[sp++] != tagDelim);
+        if(sp > cur) {
+            size_t vp = sp;
+            while (vp < len && rawMsg[vp++] != valDelim);
+            FixItemViewer item {atoi(rawMsg.substr(cur, sp-cur).c_str()),
+                         sp+1, vp};
+            cur = vp;
+            return item;
+        }
+    }
+    return FixItemViewer(-1, 0, 0);
 }

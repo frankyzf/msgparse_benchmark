@@ -12,9 +12,10 @@ class FixItem {
 public:
 
     FixItem()=default;
-    FixItem(int tag, const string &value, bool valid) : tag(tag), value(value), valid(valid) { }
+    FixItem(int tag, const string &value) :
+            tag(tag), value(value) { }
 
-    operator bool() {return valid;}
+    operator bool() {return tag > 0;}
 
     int getTag() const {
         return tag;
@@ -31,19 +32,9 @@ public:
     void setValue(const string &value) {
         FixItem::value = value;
     }
-
-    bool isValid() const {
-        return valid;
-    }
-
-    void setValid(bool valid) {
-        FixItem::valid = valid;
-    }
-
 protected:
     int tag;
     string value;
-    bool valid;
 
 };
 

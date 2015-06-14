@@ -2,7 +2,9 @@
 
 #include "common.h"
 #include "FixItem.h"
+#include "FixItemViewer.h"
 #include "FixMsg.h"
+
 
 int main(int argc, const char** argv) {
     string rawstr="8=FIX.4.4\0019=176\00135=S\00134=6\00149=BARCP\00152=20150611-08:12:58.034\001"
@@ -15,11 +17,7 @@ int main(int argc, const char** argv) {
     for(int i = 0; i < num; i++)
     {
         FixMsg msg(rawstr);
-        while( msg.getNextItem());
-        int m , n , k;
-//        do {
-//           tie(m, n, k) =  msg.parseNextItem();
-//        }while(m >= 0);
+        while( msg.getNextItemViewer());
     }
     return 0;
 }
