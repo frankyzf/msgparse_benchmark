@@ -5,8 +5,7 @@
 #ifndef PARSEFIXMSG_FIXMSG_H
 #define PARSEFIXMSG_FIXMSG_H
 
-#include <mutex>
-#include <queue>
+
 #include "common.h"
 #include "FixItem.h"
 #include "FixItemViewer.h"
@@ -23,6 +22,10 @@ public:
     FixItemViewer getNextItemViewer();
     FixItemViewer getCachedNextItemViewer();
     void ParsingAll();
+
+    FixItemViewer getNextItemViewer_SIMD();
+    pair<int,int> getSplitPosition(int p);
+
 protected:
     string rawMsg;
     size_t cur;
