@@ -16,6 +16,10 @@ int main(int argc, const char** argv) {
     {
         FixMsg msg(rawstr);
         while( msg.getNextItem());
+        int m , n , k;
+//        do {
+//           tie(m, n, k) =  msg.parseNextItem();
+//        }while(m >= 0);
     }
     return 0;
 }
